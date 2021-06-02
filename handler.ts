@@ -11,12 +11,13 @@ const client = new FaceClient(credentials, endpoint);
 
 export const detect: APIGatewayProxyHandler = async (event, _context) => {
   await new Promise((resolve)=>resolve([event, _context]));
-  console.info("[LOG]", event);
+  // console.info("[LOG]", event);
   // console.info(await client.face.detectWithStream(event));
   return {
     statusCode: 200,
     body: JSON.stringify({
       message: 'detect',
+      event,
     }, null, 2),
   };
 }
