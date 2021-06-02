@@ -11,15 +11,24 @@ const client = new FaceClient(credentials, endpoint);
 
 export const detect: APIGatewayProxyHandler = async (event, _context) => {
   await new Promise((resolve)=>resolve([event, _context]));
-  const image = Buffer.from(event.body,'base64');
-  const res = await client.face.detectWithStream(image);
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'detect',
-      res,
-    }, null, 2),
-  };
+  try {
+    const image = Buffer.from(event.body, 'base64');
+    const res = await client.face.detectWithStream(image);
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: 'detect',
+        res,
+      }, null, 2),
+    };  
+  }catch(e){
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: e,
+      }, null, 2),
+    };  
+  }
 }
 
 export const findSimilar: APIGatewayProxyHandler = async (event, _context) => {
