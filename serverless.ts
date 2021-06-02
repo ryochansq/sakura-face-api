@@ -19,11 +19,14 @@ const serverlessConfiguration: Serverless = {
   provider: {
     name: 'aws',
     runtime: 'nodejs12.x',
+    region: 'ap-northeast-1',
     apiGateway: {
       minimumCompressionSize: 1024,
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      AZURE_API_KEY: process.env.AZURE_API_KEY,
+      TEST_SECRET: process.env.TEST_SECRET,
     },
   },
   functions: {
