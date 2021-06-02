@@ -34,7 +34,7 @@ const serverlessConfiguration: Serverless = {
       events: [
         {
           http: {
-            method: 'get',
+            method: 'post',
             path: 'detect',
           }
         }
@@ -45,7 +45,7 @@ const serverlessConfiguration: Serverless = {
       events: [
         {
           http: {
-            method: 'get',
+            method: 'post',
             path: 'findSimilar',
           }
         }
