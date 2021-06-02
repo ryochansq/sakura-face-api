@@ -1,11 +1,21 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import 'source-map-support/register';
 
-export const hello: APIGatewayProxyHandler = async (event, _context) => {
+export const detect: APIGatewayProxyHandler = async (event, _context) => {
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: `test_secret: ${process.env.TEST_SECRET}`,
+      message: 'detect',
+      input: event,
+    }, null, 2),
+  };
+}
+
+export const findSimilar: APIGatewayProxyHandler = async (event, _context) => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: 'find similar',
       input: event,
     }, null, 2),
   };

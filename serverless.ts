@@ -26,17 +26,27 @@ const serverlessConfiguration: Serverless = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       AZURE_API_KEY: process.env.AZURE_API_KEY,
-      TEST_SECRET: process.env.TEST_SECRET,
     },
   },
   functions: {
-    hello: {
-      handler: 'handler.hello',
+    detect: {
+      handler: 'handler.detect',
       events: [
         {
           http: {
             method: 'get',
-            path: 'hello',
+            path: 'detect',
+          }
+        }
+      ]
+    },
+    findSimilar: {
+      handler: 'handler.findSimilar',
+      events: [
+        {
+          http: {
+            method: 'get',
+            path: 'findSimilar',
           }
         }
       ]
