@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - main
 
 name: Auto Deploy to AWS Lambda & API Gateway
 
