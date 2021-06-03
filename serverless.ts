@@ -12,10 +12,13 @@ const serverlessConfiguration: Serverless = {
     webpack: {
       webpackConfig: './webpack.config.js',
       includeModules: true
+    },
+    apigwBinary: {
+      types: ['application/octet-stream']
     }
   },
   // Add the serverless-webpack plugin
-  plugins: ['serverless-webpack'],
+  plugins: ['serverless-webpack', 'serverless-apigw-binary'],
   provider: {
     name: 'aws',
     runtime: 'nodejs12.x',
