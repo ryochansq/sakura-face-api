@@ -2,6 +2,7 @@ import { APIGatewayProxyHandler } from 'aws-lambda';
 import 'source-map-support/register';
 import { ApiKeyCredentials } from '@azure/ms-rest-js';
 import { FaceClient } from '@azure/cognitiveservices-face';
+import students from './students';
 
 interface IFindSimilarRequestBody {
   faceId: string;
@@ -44,7 +45,10 @@ export const findSimilar: APIGatewayProxyHandler = async (event) => {
   return client.face.findSimilar(body.faceId, {faceListId: 'sakura-gakuin'})
   .then(res => ({
     statusCode: 200,
-    body: JSON.stringify(res),
+    body: JSON.stringify(res.map(face => ({
+      student: students[face.persistedFaceId] as string,
+      confidence: face.confidence
+    }))),
   }))
   .catch(e => {
     const error = e as IError
