@@ -15,7 +15,7 @@ POST {{find_similar_url}}
 content-type: application/json
 
 {
-  "faceId": "499e6f18-7494-4c04-a52f-5afbe7aecdc5"
+  "faceId": "hoge"
 }
 
 ### Failure

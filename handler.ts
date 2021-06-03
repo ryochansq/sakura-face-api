@@ -25,7 +25,7 @@ const client = new FaceClient(credentials, endpoint);
 
 export const detect: APIGatewayProxyHandler = async (event) => {
   const image = Buffer.from(event.body, 'base64');
-  return client.face.detectWithStream(image)
+  return client.face.detectWithStream(image, {recognitionModel: 'recognition_04'})
     .then(res => ({
       statusCode: 200,
       body: JSON.stringify(res),
