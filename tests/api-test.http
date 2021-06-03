@@ -12,7 +12,7 @@ content-type: application/octet-stream
 ### Success findSimilar
 
 POST {{find_similar_url}}
-content-type: application/octet-stream
+content-type: application/json
 
 < images/fujihira.jpg
 

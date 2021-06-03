@@ -3,6 +3,10 @@ import 'source-map-support/register';
 import { ApiKeyCredentials } from '@azure/ms-rest-js';
 import { FaceClient } from '@azure/cognitiveservices-face';
 
+interface IFindSimilarRequestBody {
+  faceId: string;
+}
+
 interface IError {
   statusCode: number;
   body: {
@@ -21,27 +25,32 @@ const client = new FaceClient(credentials, endpoint);
 
 export const detect: APIGatewayProxyHandler = async (event) => {
   const image = Buffer.from(event.body, 'base64');
-  try {
-    const res = await client.face.detectWithStream(image);
-    return {
+  return client.face.detectWithStream(image)
+    .then(res => ({
       statusCode: 200,
-      body: JSON.stringify({
-        res,
-      }, null, 2),
-    };
-  } catch (e) {
-    const error = e as IError
-    return {
-      statusCode: error.statusCode,
-      body: JSON.stringify(error.body, null, 2),
-    };
-  }
+      body: JSON.stringify(res),
+    }))
+    .catch(e => {
+      const error = e as IError
+      return {
+        statusCode: error.statusCode,
+        body: JSON.stringify(error.body),
+      };
+    });
 }
 
 export const findSimilar: APIGatewayProxyHandler = async (event) => {
-  await new Promise((resolve)=>resolve('hoge'));
-  return {
+  const body = JSON.parse(event.body) as IFindSimilarRequestBody;
+  return client.face.findSimilar(body.faceId)
+  .then(res => ({
     statusCode: 200,
-    body: event.body,
-  };
+    body: JSON.stringify(res),
+  }))
+  .catch(e => {
+    const error = e as IError
+    return {
+      statusCode: error.statusCode,
+      body: JSON.stringify(error.body),
+    };
+  });
 }
