@@ -9,29 +9,21 @@ const endpoint = 'https://sakura-face-api.cognitiveservices.azure.com/';
 const credentials = new ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': key } });
 const client = new FaceClient(credentials, endpoint);
 
-export const detect: APIGatewayProxyHandler = async (event, _context) => {
-  await new Promise((resolve)=>resolve([event, _context]));
-  try {
-    const image = Buffer.from(event.body, 'base64');
-    const res = await client.face.detectWithStream(image);
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: 'detect',
-        res,
-      }, null, 2),
-    };  
-  }catch(e){
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        error: e,
-      }, null, 2),
-    };  
-  }
+export const detect: APIGatewayProxyHandler = async (event) => {
+  // const image = Buffer.from(event, 'base64');
+
+  console.info('event', event);
+  // console.info('image', image);
+  // const res = await client.face.detectWithStream(event);
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: event.isBase64Encoded,
+    }, null, 2),
+  };
 }
 
-export const findSimilar: APIGatewayProxyHandler = async (event, _context) => {
+export const findSimilar: APIGatewayProxyHandler = async (event) => {
   await new Promise((resolve)=>resolve('hoge'));
   return {
     statusCode: 200,
