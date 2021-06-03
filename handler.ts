@@ -10,16 +10,12 @@ const credentials = new ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-K
 const client = new FaceClient(credentials, endpoint);
 
 export const detect: APIGatewayProxyHandler = async (event) => {
-  // const image = Buffer.from(event, 'base64');
-
-  console.info('event', event);
-  // console.info('image', image);
-  // const res = await client.face.detectWithStream(event.body);
+  const image = Buffer.from(event.body, 'base64');
+  const res = await client.face.detectWithStream(image);
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: event.isBase64Encoded,
-      event,
+      res,
     }, null, 2),
   };
 }
