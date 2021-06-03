@@ -12,14 +12,14 @@ const client = new FaceClient(credentials, endpoint);
 export const detect: APIGatewayProxyHandler = async (event) => {
   // const image = Buffer.from(event, 'base64');
 
-  // console.info('event', event);
+  console.info('event', event);
   // console.info('image', image);
-  const res = await client.face.detectWithStream(event.body);
+  // const res = await client.face.detectWithStream(event.body);
   return {
     statusCode: 200,
     body: JSON.stringify({
       message: event.isBase64Encoded,
-      res,
+      event,
     }, null, 2),
   };
 }
