@@ -42,7 +42,7 @@ export const detect: APIGatewayProxyHandler = async (event) => {
 
 export const findSimilar: APIGatewayProxyHandler = async (event) => {
   const body = JSON.parse(event.body) as IFindSimilarRequestBody;
-  return client.face.findSimilar(body.faceId, {faceListId: 'sakura-gakuin'})
+  return client.face.findSimilar(body.faceId, {faceListId: 'sakura-gakuin', maxNumOfCandidatesReturned: 3})
   .then(res => ({
     statusCode: 200,
     body: JSON.stringify(res.map(face => ({
