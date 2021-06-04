@@ -58,7 +58,7 @@ export const findSimilar: APIGatewayProxyHandler = async (event) => {
       headers,
       body: JSON.stringify(
         res.map((face) => ({
-          student: students[face.persistedFaceId] as string,
+          name: students[face.persistedFaceId] as string,
           confidence: face.confidence,
         }))
       ),
