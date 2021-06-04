@@ -52,6 +52,7 @@ export const findSimilar: APIGatewayProxyHandler = async (event) => {
     .findSimilar(body.faceId, {
       faceListId: "sakura-gakuin",
       maxNumOfCandidatesReturned: 3,
+      mode: "matchFace",
     })
     .then((res) => ({
       statusCode: 200,
