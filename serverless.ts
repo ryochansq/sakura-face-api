@@ -41,7 +41,6 @@ const serverlessConfiguration: Serverless = {
             path: "detect",
             cors: {
               origins: "*",
-              headers: ["Access-Control-Allow-Origin", "Content-Type"],
             },
           },
         },
@@ -56,7 +55,6 @@ const serverlessConfiguration: Serverless = {
             path: "findSimilar",
             cors: {
               origins: "*",
-              headers: ["Access-Control-Allow-Origin", "Content-Type"],
             },
           },
         },
